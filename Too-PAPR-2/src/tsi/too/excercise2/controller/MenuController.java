@@ -16,6 +16,12 @@ import java.util.List;
 
 import tsi.too.message_dialog.InputDialog;
 
+/**
+ * Convenience class for displaying the menu.
+ * 
+ * @author Lucas Cristovam
+ *
+ */
 
 public class MenuController {
 

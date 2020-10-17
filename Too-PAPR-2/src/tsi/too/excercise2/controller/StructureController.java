@@ -32,6 +32,12 @@ import tsi.too.excercise2.util.Pair;
 import tsi.too.message_dialog.InputDialog;
 import tsi.too.message_dialog.MessageDialog;
 
+
+/**
+ * Convenience class for handling all the actions over an <code>MetalicStruture</code>.
+ * 
+ * @author Lucas Cristovam
+ */
 public class StructureController implements Structure{
 
 	private static StructureController instance; 
@@ -42,6 +48,11 @@ public class StructureController implements Structure{
 		structure = new MetalicStructure();
 	}
 	
+	/**
+	 * Ensures that only one instance is created.
+	 * 
+	 * @return the current created instance.
+	 */
 	public static StructureController getInstance() {
 		synchronized (StructureController.class) {
 			if(instance == null)
@@ -56,6 +67,11 @@ public class StructureController implements Structure{
 		structure.addPiece(readPieceData());
 	}
 	
+	/**
+	 * Retrieves the piece data via user input.
+	 * 
+	 * @return the received data.
+	 */
 	private Piece readPieceData() {
 		var type = InputDialog.showOptionDialog(PIECE, CHOOSE_A_TYPE, PieceType.values());
 		
@@ -73,8 +89,11 @@ public class StructureController implements Structure{
 		MessageDialog.showInformationDialog(METALIC_STRUCTURE, createTotalVolumeMessage());
 	}
 	
+	/**
+	 * @return the structure total volume in a formatted string
+	 */
 	private String createTotalVolumeMessage() {
-		return String.format("%s: %1.2f m³", TOTAL_VOLUME, structure.getTotalVolume());
+		return String.format("%s: %1.2f m³", TOTAL_VOLUME, structure.calculateTotalVolume());
 	}
 	
 	@Override
@@ -82,8 +101,11 @@ public class StructureController implements Structure{
 		MessageDialog.showInformationDialog(METALIC_STRUCTURE, createTotalWeightMessage());
 	}
 	
+	/**
+	 * @return the structure total weight in a formatted string
+	 */
 	private String createTotalWeightMessage() {
-		return String.format("%s: %1.2f Kg", TOTAL_WEIGHT, structure.getTotalWeight());
+		return String.format("%s: %1.2f Kg", TOTAL_WEIGHT, structure.calculateTotalWeight());
 	}
 	
 	@Override
@@ -91,8 +113,11 @@ public class StructureController implements Structure{
 		MessageDialog.showTextMessage(PAINT_CONSUMPTION, createPaintCansMessage());
 	}
 	
+	/**
+	 * @return the total paint cans needed to paint the structure in a formatted String.
+	 */
 	private String createPaintCansMessage() {
-		var message = new StringBuilder(String.format("%s: %1.2f L", PAINT_CONSUMPTION, structure.getPaintConsumption()));
+		var message = new StringBuilder(String.format("%s: %1.2f L", PAINT_CONSUMPTION, structure.calculatePaintConsumption()));
 		
 		for(Pair<PaintCan, Integer> p : paintCansNeeded())
 			message.append(String.format("\n%s %1.1f L: %d", CANS_OF, p.getFirst().getCapacity(), p.getSecond()));
@@ -100,11 +125,12 @@ public class StructureController implements Structure{
 		return message.toString();
 	}
 	
+	
 	@Override
 	public List<Pair<PaintCan, Integer>> paintCansNeeded(){
 		var availableCans = Arrays.asList(PaintCan.values());
 		var neededCans = new ArrayList<Pair<PaintCan, Integer>>();
-		double totalPaintNeeded = structure.getPaintConsumption();
+		double totalPaintNeeded = structure.calculatePaintConsumption();
 		int quantity;
 
 		Collections.sort(availableCans, (arg0, arg1) -> arg0.getCapacity() < arg1.getCapacity() ? 1 : -1);		
@@ -132,11 +158,14 @@ public class StructureController implements Structure{
 		MessageDialog.showTextMessage(TOTAL_VOLUME_BY_PIECE, createVolumeByPieceMessage());
 	}
 	
+	/**
+	 * @return the total volume by piece in the structure in a formatted String.
+	 */
 	private String createVolumeByPieceMessage() {
 		var message = new StringBuilder();
 		
 		for(PieceType type : PieceType.values()) {
-			message.append(String.format("%s: %1.2f m³\n", type.getName(), structure.getTotalVolumeByPiece(type)));
+			message.append(String.format("%s: %1.2f m³\n", type.getName(), structure.calculateTotalVolumeByPiece(type)));
 		}
 		
 		return message.toString();
@@ -156,11 +185,14 @@ public class StructureController implements Structure{
 		MessageDialog.showTextMessage(Constants.REPORT, message.toString());
 	}
 	
+	/**
+	 * @return the total area of he structure in a formatted String.
+	 */
 	private String createAreaMessage() {
 		var message = new StringBuilder()
-				.append(String.format("%s: %1.2f m²", TOTAL_ALUMINIUM_AREA, structure.getTotalArea(Material.ALUMINIUM)))
-				.append(String.format("\n%s: %1.2f m²", TOTAL_IRON_AREA, structure.getTotalArea(Material.IRON)))
-				.append(String.format("\n%s: %1.2f m²", TOTAL_AREA, structure.getTotalArea()));
+				.append(String.format("%s: %1.2f m²", TOTAL_ALUMINIUM_AREA, structure.calculateTotalArea(Material.ALUMINIUM)))
+				.append(String.format("\n%s: %1.2f m²", TOTAL_IRON_AREA, structure.calculateTotalArea(Material.IRON)))
+				.append(String.format("\n%s: %1.2f m²", TOTAL_AREA, structure.calculateTotalArea()));
 
 		return message.toString();
 	}

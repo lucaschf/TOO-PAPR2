@@ -12,7 +12,22 @@ import tsi.too.excercise2.domain.Piece.Material;
 import tsi.too.message_dialog.InputDialog;
 import tsi.too.message_dialog.MessageDialog;
 
+/**
+ * Convenience class for receiving piece data via user input.
+ *
+ * @author Lucas Cristovam
+ *
+ * @param <E> the Piece type
+ */
+
 public abstract class PieceController<E extends Piece> {
+	
+	/**
+	 * Reads all the piece data and returns the reading status.
+	 * 
+	 * @param piece Reference of the piece where the data will be stored.
+	 * @return true if valid data is entered, false otherwise.
+	 */
 	@SuppressWarnings("unchecked") // Assuming that is passing an object of type E.
 	public boolean readData(Piece piece) {
 		var quantity =  readQuantity(piece.getType().getName());
@@ -32,8 +47,20 @@ public abstract class PieceController<E extends Piece> {
 		return true;
 	};
 	
-	public abstract boolean readDimensions(E p);
+	/**
+	 * Read the piece dimensions.
+	 * 
+	 * @param piece Reference of the piece where the data will be stored.
+	 * @return true if valid data is entered, false otherwise.
+	 */
+	public abstract boolean readDimensions(E piece);
 	
+	/**
+	 * Gets the quantity of the piece.
+	 * 
+	 * @param title the title to be shown.
+	 * @return the quantity.
+	 */
 	private Integer readQuantity(String title) {
 		return InputDialog.showIntegerInputDialog(
 				title, 
@@ -42,6 +69,13 @@ public abstract class PieceController<E extends Piece> {
 		);
 	}
 	
+	/**
+	 * Convenience method for reading a real value accepting only values ​​greater than zero.
+	 * 
+	 * @param title the title of the dialog. 
+	 * @param message the message for user.
+	 * @return the user's input
+	 */
 	protected Double readDoubleGreaterThanZero(String title, String message) {
 		return InputDialog.showDoubleInputDialog(
 				title, 
@@ -50,6 +84,11 @@ public abstract class PieceController<E extends Piece> {
 		);
 	}
 	
+	/**
+	 * Convenience method for choosing the piece material.
+	 *  
+	 * @return the chosen material 
+	 */
 	private Material readMaterial() {
 		Material choosen; 
 		

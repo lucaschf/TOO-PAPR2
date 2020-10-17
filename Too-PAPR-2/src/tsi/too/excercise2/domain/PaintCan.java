@@ -1,5 +1,10 @@
 package tsi.too.excercise2.domain;
 
+/**
+ * Represents all accepted paint can sizes
+ *  
+ * @author Lucas Cristovam
+ */
 public enum PaintCan {
 	HALF_LITER(0.5),
 	TWO_LITERS(2),
