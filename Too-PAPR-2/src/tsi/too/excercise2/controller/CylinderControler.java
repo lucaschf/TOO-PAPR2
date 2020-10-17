@@ -10,8 +10,7 @@ public class CylinderControler extends PieceController<Cylinder>{
 
 	private static CylinderControler instance;
 	
-	private CylinderControler() {
-	}
+	private CylinderControler() {}
 	
 	public static CylinderControler getInstance() {
 		synchronized (CylinderControler.class) {

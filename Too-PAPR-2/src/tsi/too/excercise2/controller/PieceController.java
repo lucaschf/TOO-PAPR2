@@ -55,7 +55,7 @@ public abstract class PieceController<E extends Piece> {
 		
 		do {
 			choosen = InputDialog.showOptionDialog(PIECE, CHOOSE_A_MATERIAL, Material.values());
-		}while(choosen == null && !MessageDialog.showConfirmationDialog(PIECE, CANCEL_PIECE_INSERTION));
+		} while(choosen == null && !MessageDialog.showConfirmationDialog(PIECE, CANCEL_PIECE_INSERTION));
 		
 		return choosen;
 	}

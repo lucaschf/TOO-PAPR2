@@ -5,6 +5,9 @@ public interface Constants {
 	String PIECE = "Peça";
 	String PIECES = "Peças";
 	String TOTAL_WEIGHT = "Peso";
+	String TOTAL_AREA = "Area total";
+	String TOTAL_ALUMINIUM_AREA = "Area total em alumínio";
+	String TOTAL_IRON_AREA = "Area total em ferro";
 	String TOTAL_VOLUME_BY_PIECE = "Volume por tipo peça";
 	String TOTAL_VOLUME = "Volume";
 	String PAINT_CAN_QUANTITY = "Latas de tinta";

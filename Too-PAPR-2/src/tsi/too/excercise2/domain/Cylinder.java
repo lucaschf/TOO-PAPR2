@@ -37,7 +37,7 @@ public class Cylinder extends Piece {
 
 	@Override
 	public double calculateVolume() {
-		return 2 * Math.PI * Math.pow(radius, 2) * height;
+		return Math.PI * Math.pow(radius, 2) * height;
 	}
 
 	@Override
