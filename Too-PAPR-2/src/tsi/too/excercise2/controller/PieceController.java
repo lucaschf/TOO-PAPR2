@@ -13,7 +13,7 @@ import tsi.too.message_dialog.InputDialog;
 import tsi.too.message_dialog.MessageDialog;
 
 public abstract class PieceController<E extends Piece> {
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked") // Assuming that is passing an object of type E.
 	public boolean readData(Piece piece) {
 		var quantity =  readQuantity(piece.getType().getName());
 		if(quantity == null)

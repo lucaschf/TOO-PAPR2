@@ -1,14 +1,11 @@
 package tsi.too.excercise2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tsi.too.excercise2.domain.Piece.Material;
-import tsi.too.excercise2.util.Pair;
 
 
 public class Structure {
