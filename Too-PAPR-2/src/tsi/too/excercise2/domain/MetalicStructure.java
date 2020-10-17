@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 import tsi.too.excercise2.domain.Piece.Material;
 
 
-public class Structure {
+public class MetalicStructure {
 	private ArrayList<Piece> pieces = new ArrayList<>();
 	
 	public boolean addPiece(Piece piece) {

@@ -27,19 +27,19 @@ import tsi.too.excercise2.domain.Piece;
 import tsi.too.excercise2.domain.Piece.Material;
 import tsi.too.excercise2.domain.PieceFactory;
 import tsi.too.excercise2.domain.PieceType;
-import tsi.too.excercise2.domain.Structure;
+import tsi.too.excercise2.domain.MetalicStructure;
 import tsi.too.excercise2.util.Pair;
 import tsi.too.message_dialog.InputDialog;
 import tsi.too.message_dialog.MessageDialog;
 
-public class StructureController {
+public class StructureController implements Structure{
 
 	private static StructureController instance; 
 	
-	private Structure structure;
+	private MetalicStructure structure;
 	
 	private StructureController() {
-		structure = new Structure();
+		structure = new MetalicStructure();
 	}
 	
 	public static StructureController getInstance() {
@@ -51,6 +51,7 @@ public class StructureController {
 		}
 	}
 	
+	@Override
 	public void addPiece() {
 		structure.addPiece(readPieceData());
 	}
@@ -67,6 +68,7 @@ public class StructureController {
 		return controller.readData(piece) ? piece : null;
 	}
 	
+	@Override
 	public void showTotalVolume() {
 		MessageDialog.showInformationDialog(METALIC_STRUCTURE, createTotalVolumeMessage());
 	}
@@ -75,6 +77,7 @@ public class StructureController {
 		return String.format("%s: %1.2f m³", TOTAL_VOLUME, structure.getTotalVolume());
 	}
 	
+	@Override
 	public void showTotalWeight() {
 		MessageDialog.showInformationDialog(METALIC_STRUCTURE, createTotalWeightMessage());
 	}
@@ -83,6 +86,7 @@ public class StructureController {
 		return String.format("%s: %1.2f Kg", TOTAL_WEIGHT, structure.getTotalWeight());
 	}
 	
+	@Override
 	public void showPaintCansNeeded() {		
 		MessageDialog.showTextMessage(PAINT_CONSUMPTION, createPaintCansMessage());
 	}
@@ -96,6 +100,7 @@ public class StructureController {
 		return message.toString();
 	}
 	
+	@Override
 	public List<Pair<PaintCan, Integer>> paintCansNeeded(){
 		var availableCans = Arrays.asList(PaintCan.values());
 		var neededCans = new ArrayList<Pair<PaintCan, Integer>>();
@@ -122,6 +127,7 @@ public class StructureController {
 		return neededCans;
 	}
 	
+	@Override
 	public void showTotalVolumeByPiece() {
 		MessageDialog.showTextMessage(TOTAL_VOLUME_BY_PIECE, createVolumeByPieceMessage());
 	}
@@ -136,6 +142,7 @@ public class StructureController {
 		return message.toString();
 	}
 	
+	@Override
 	public void showReport() {
 		var message = new StringBuilder();
 		
@@ -158,6 +165,7 @@ public class StructureController {
 		return message.toString();
 	}
 
+	@Override
 	public void showMaterialReport() {
 		var pieces = structure.getPieces();
 		pieces.sort((piece, another) -> piece.getMaterial().getName().compareTo(another.getMaterial().getName()));
@@ -173,6 +181,7 @@ public class StructureController {
 		);
 	}
 	
+	@Override
 	public void showPieceTypeReport() {
 		var pieces = structure.getPieces();
 		
